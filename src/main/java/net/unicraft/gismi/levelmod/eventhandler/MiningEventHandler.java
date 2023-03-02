@@ -9,10 +9,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.unicraft.gismi.levelmod.Levelmod;
+import net.unicraft.gismi.levelmod.capabilities.MiningSkill;
 import net.unicraft.gismi.levelmod.capabilities.generic.LevelableSkillProvider;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class MiningEventHandler {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
 
-        if(event.getState().is(mineablePickAxe) && event.getState().is(stoneType)) {
+        if(MiningSkill.isXPEligible(event)) {
             event.getPlayer().getCapability(LevelableSkillProvider.PLAYER_LEVELABLE_SKILLS).ifPresent(skills -> {
                 skills.get("mining").addXP(10f);
                 event.getPlayer().sendSystemMessage(Component.literal("Added Mining XP"));
@@ -40,5 +42,9 @@ public class MiningEventHandler {
 
         List<ItemStack> itemStacks = event.getState().getDrops(builder);
         String test = "";
+    }
+
+    private boolean isXPEligible(BlockEvent.BreakEvent event) {
+        return event.getPlayer().getItemInHand(event.getPlayer().getUsedItemHand()).is(Tags.Items.TOOLS_PICKAXES);
     }
 }

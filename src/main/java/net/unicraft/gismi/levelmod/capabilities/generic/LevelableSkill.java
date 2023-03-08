@@ -1,8 +1,9 @@
 package net.unicraft.gismi.levelmod.capabilities.generic;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.eventbus.api.Event;
 
-public class LevelableSkill {
+public abstract class LevelableSkill {
     private int level = 0;
     private float xp = 0;
     private String idName;
@@ -28,8 +29,10 @@ public class LevelableSkill {
         if(this.xp >= this.xpNeeded) {
             levelUp();
         }
-        this.xp = Math.round(xp * 100) / 100;
+        this.xp = (Math.round(xp * 100)) / 100F;
     }
+
+    public abstract <T extends Event> void earnXP(T event);
 
     private void levelUp() {
         this.xp -= this.xpNeeded;

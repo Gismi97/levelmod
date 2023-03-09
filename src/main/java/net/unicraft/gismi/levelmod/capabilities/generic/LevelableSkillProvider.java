@@ -15,12 +15,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 
 public class LevelableSkillProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<HashMap<String,LevelableSkill>> PLAYER_LEVELABLE_SKILLS = CapabilityManager.get(new CapabilityToken<HashMap<String,LevelableSkill>>() {});
+    public static Capability<HashMap<String,LevelableSkill>> PLAYER_LEVELABLE_SKILLS = CapabilityManager.get(new CapabilityToken<>() {});
     
     private HashMap<String,LevelableSkill> skills = null;
     private final LazyOptional<HashMap<String,LevelableSkill>> optionalLevelableSkills= LazyOptional.of(this::createLevelableSkills);
 
-    private HashMap<String,LevelableSkill> createLevelableSkills() {
+    private @NotNull HashMap<String,LevelableSkill> createLevelableSkills() {
         if(this.skills == null) {
             this.skills = new HashMap<>();
             MiningSkill mining = new MiningSkill();

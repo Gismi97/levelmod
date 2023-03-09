@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.eventbus.api.Event;
 
 public abstract class LevelableSkill {
-    private int level = 0;
-    private float xp = 0;
+    private int level;
+    private float xp;
     private String idName;
     private String name;
     private String description;
@@ -29,7 +29,7 @@ public abstract class LevelableSkill {
         if(this.xp >= this.xpNeeded) {
             levelUp();
         }
-        this.xp = (Math.round(xp * 100)) / 100F;
+        this.xp = (Math.round(xp * 100F)) / 100F;
     }
 
     public abstract <T extends Event> void earnXP(T event);
@@ -41,7 +41,7 @@ public abstract class LevelableSkill {
     }
 
     private void calcXpNeeded() {
-        this.xpNeeded = Math.round((Math.pow(this.level * 100,1.15)*100))/100;
+        this.xpNeeded = Math.round((Math.pow(this.level * 100F,1.15F)*100F))/100F;
     }
 
     public float getXpNeeded() {
@@ -74,6 +74,11 @@ public abstract class LevelableSkill {
 
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+        calcXpNeeded();
     }
 
     public void saveNBTData(CompoundTag nbt) {

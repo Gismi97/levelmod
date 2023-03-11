@@ -10,7 +10,7 @@ import net.unicraft.gismi.levelmod.config.LevelmodCommonConfig;
 public class MiningSkill extends LevelableSkill {
 
     public MiningSkill() {
-        super(0,0,"mining", "Mining","How good you are at breaking stone and ore");
+        super(0,0,MINING_SKILL_ID, "Mining","How good you are at breaking stone and ore");
     }
 
     public static boolean isXPEligible(BlockEvent.BreakEvent event) {

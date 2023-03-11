@@ -4,6 +4,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.eventbus.api.Event;
 
 public abstract class LevelableSkill {
+
+    public static final String SWORD_SKILL_ID = "swordfighting";
+    public static final String MINING_SKILL_ID = "mining";
+
+
     private int level;
     private float xp;
     private String idName;

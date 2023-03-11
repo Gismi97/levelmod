@@ -10,7 +10,11 @@ public class LevelmodCommonConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> DEBUG;
 
     public static final ForgeConfigSpec.ConfigValue<Float> MINING_SKILL_BASE_XP;
-    public static final ForgeConfigSpec.ConfigValue<Integer> MINING_SKILL_ORE_MULTIPLIER;
+    public static final ForgeConfigSpec.ConfigValue<Float> MINING_SKILL_ORE_MULTIPLIER;
+
+
+    public static final ForgeConfigSpec.ConfigValue<Float> SWORD_SKILL_BASE_XP;
+    public static final ForgeConfigSpec.ConfigValue<Float> SWORD_SKILL_HOSTILE_MULTIPLIER;
 
     static {
         BUILDER.push("Levelmod configs");
@@ -21,7 +25,15 @@ public class LevelmodCommonConfig {
                 define("Mining XP",0.5F);
 
         MINING_SKILL_ORE_MULTIPLIER = BUILDER.comment("Base XP is multiplied with this value as bonus xp for ores. \nSet to 1 for no bonus XP.").
-                defineInRange("Mining Ore Bonus",3,1,99);
+                define("Mining Ore Bonus",3F);
+
+
+
+        SWORD_SKILL_BASE_XP = BUILDER.comment("How much XP is earned attacking something with a sword").
+                define("Sword XP", 0.5F);
+
+        SWORD_SKILL_HOSTILE_MULTIPLIER = BUILDER.comment("Base XP is multiplied with this value when striking a hostile mob or player. \nSet to 1 for no bonux XP").
+                define("Sword hostile bonus", 3F);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

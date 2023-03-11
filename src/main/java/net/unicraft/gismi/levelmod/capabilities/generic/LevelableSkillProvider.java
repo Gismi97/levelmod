@@ -9,6 +9,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.unicraft.gismi.levelmod.capabilities.MiningSkill;
+import net.unicraft.gismi.levelmod.capabilities.SwordSkill;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +25,9 @@ public class LevelableSkillProvider implements ICapabilityProvider, INBTSerializ
         if(this.skills == null) {
             this.skills = new HashMap<>();
             MiningSkill mining = new MiningSkill();
-            skills.put(mining.getIdName(),mining);
+            skills.put(LevelableSkill.MINING_SKILL_ID,mining);
+            SwordSkill swords = new SwordSkill();
+            skills.put(LevelableSkill.SWORD_SKILL_ID,swords);
         }
 
         return this.skills;
